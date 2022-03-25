@@ -1,0 +1,7 @@
+{
+  "name": "CommonServiceCentre",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

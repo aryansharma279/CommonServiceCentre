@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        (click)= "dismiss()"
+        defaultHref="tabs/services"
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-title>Add New Service</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ng-container >
+    <form>
+      <ion-card>
+        <ion-list>
+          <ion-item>
+            <ion-label position="fixed">Name</ion-label>
+            <ion-input
+              type="text"
+              placeholder="Enter Service name"
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="fixed">Description</ion-label>
+            <ion-textarea placeholder="Enter more information here..."></ion-textarea>
+          </ion-item>
+
+          <ion-item>
+            <ion-title>Documents Required</ion-title>
+
+          </ion-item>
+            <ion-item >
+              <ion-label>Aadhar Card</ion-label>
+              <ion-checkbox slot="end" color="primary"></ion-checkbox>
+            </ion-item>
+
+          
+        </ion-list>
+
+        <ion-row>
+          <ion-button class="save-btn">
+              Save
+            <ion-icon slot="end" name="save"></ion-icon>
+          </ion-button>
+        </ion-row>
+      </ion-card>
+    </form>
+  </ng-container>
+</ion-content>
