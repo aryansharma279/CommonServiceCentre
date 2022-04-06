@@ -12,35 +12,73 @@
 
 <ion-content>
   <ng-container >
-    <form>
+    <form [formGroup]="addForm"   (ngSubmit)="addService(addForm.value, addForm)">
       <ion-card>
+        
+
         <ion-list>
           <ion-item>
             <ion-label position="fixed">Name</ion-label>
             <ion-input
               type="text"
               placeholder="Enter Service name"
+              formControlName="name"
             ></ion-input>
           </ion-item>
           <ion-item>
             <ion-label position="fixed">Description</ion-label>
-            <ion-textarea placeholder="Enter more information here..."></ion-textarea>
+            <ion-textarea placeholder="Enter more information here..."
+            formControlName="description"
+            ></ion-textarea>
           </ion-item>
+              <ion-list-header>
+                <ion-label>
+                  Documents Required
+                </ion-label>
+              </ion-list-header>
+            
+              use
+              <ion-item>
+                {{service | json}}
+                <ion-label>Documents Selected</ion-label>
 
-          <ion-item>
-            <ion-title>Documents Required</ion-title>
+                <ion-select multiple="true" cancelText="Cancel" okText="ok" formControlName="documents">
+                  <ng-container  *ngFor="let service of services; let index = index;" >
+             
+                    <ion-select-option  [value]="service.handler"> {{service.name}}</ion-select-option>
+                  </ng-container>
+                 
+                  <!-- <ion-select-option value="PanCard">PAN Card</ion-select-option>
+                  <ion-select-option value="votercard">Voter ID Card</ion-select-option> -->
+                 
+                </ion-select>
+                
+              </ion-item>
+             <ion-item  *ngIf="showField === false" >
+                   <ion-label (click)="fieldOperation('show', null)">Add new Document</ion-label>
+                   
+               </ion-item>
 
-          </ion-item>
-            <ion-item >
-              <ion-label>Aadhar Card</ion-label>
-              <ion-checkbox slot="end" color="primary"></ion-checkbox>
+               <!-- showField === true -->
+               <ion-item *ngIf="showField">
+               
+                <ion-input #inputRef placeholder="enter service name"></ion-input>
+                <ion-button color="primary" (click)="fieldOperation('add',inputRef.value)">Add</ion-button>
+              </ion-item>
+               
+            
+            <ion-item>
+              <ion-label position="fixed">Charges</ion-label>
+              <ion-input
+                type="number"
+                placeholder="Total Charges"
+                formControlName="charges"
+              ></ion-input>
             </ion-item>
-
-          
         </ion-list>
 
         <ion-row>
-          <ion-button class="save-btn">
+          <ion-button type="submit" [disabled]="!addForm.valid"  class="save-btn">
               Save
             <ion-icon slot="end" name="save"></ion-icon>
           </ion-button>
