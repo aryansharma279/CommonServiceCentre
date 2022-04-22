@@ -9,16 +9,28 @@ export class ModalService {
 
   constructor(public modalController: ModalController) { }
 
-  async presentModal(modalPage) {
+  // async presentModal(modalPage,props) {
+    
+  //   const modal = await this.modalController.create({
+  //     component: modalPage});
+
+  //   // modal.onDidDismiss()
+    
+  //     return await modal.present();
+  // }
+  async presentModal(modalPage,props) {
     
     const modal = await this.modalController.create({
-      component: modalPage});
+      component: modalPage,
+      componentProps: props
+    });
 
-    // modal.onDidDismiss()
     
-      return await modal.present();
+    modal.onDidDismiss()
+ 
+    
+    return await modal.present();
   }
-
   
 
   

@@ -1,89 +1,170 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button
-        (click)= "dismiss()"
-        defaultHref="tabs/services"
-      ></ion-back-button>
-    </ion-buttons>
-    <ion-title>Add New Service</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button (click)="dismiss()" defaultHref="tabs/services"></ion-back-button>
+        </ion-buttons>
+        <ion-title>{{operationType | titlecase}} Service</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ng-container >
-    <form [formGroup]="addForm"   (ngSubmit)="addService(addForm.value, addForm)">
-      <ion-card>
-        
+    <ng-container>
+        <form [formGroup]="addForm" (ngSubmit)="addService(addForm.value, addForm)" *ngIf="operationType === 'add'">
+            <ion-card>
 
-        <ion-list>
-          <ion-item>
-            <ion-label position="fixed">Name</ion-label>
-            <ion-input
-              type="text"
-              placeholder="Enter Service name"
-              formControlName="name"
-            ></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label position="fixed">Description</ion-label>
-            <ion-textarea placeholder="Enter more information here..."
-            formControlName="description"
-            ></ion-textarea>
-          </ion-item>
-              <ion-list-header>
-                <ion-label>
-                  Documents Required
-                </ion-label>
-              </ion-list-header>
-            
-              use
-              <ion-item>
-                {{service | json}}
-                <ion-label>Documents Selected</ion-label>
 
-                <ion-select multiple="true" cancelText="Cancel" okText="ok" formControlName="documents">
-                  <ng-container  *ngFor="let service of services; let index = index;" >
-             
-                    <ion-select-option  [value]="service.handler"> {{service.name}}</ion-select-option>
-                  </ng-container>
-                 
-                  <!-- <ion-select-option value="PanCard">PAN Card</ion-select-option>
-                  <ion-select-option value="votercard">Voter ID Card</ion-select-option> -->
-                 
-                </ion-select>
-                
-              </ion-item>
-             <ion-item  *ngIf="showField === false" >
-                   <ion-label (click)="fieldOperation('show', null)">Add new Document</ion-label>
+                <ion-list>
+                    <ion-item>
+                        <ion-label position="fixed">Name</ion-label>
+                        <ion-input type="text" placeholder="Enter Service name" formControlName="name"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="fixed">Description</ion-label>
+                        <ion-textarea placeholder="Enter more information here..." formControlName="description"></ion-textarea>
+                    </ion-item>
+                    <ion-list-header>
+                        <ion-label>
+                            Documents Required
+                        </ion-label>
+                    </ion-list-header>
+
+
+                    <ion-item>
+                       
+                        <ion-label>Select Documents</ion-label>
+
+                        <ion-select (ionChange)="getDocuments()" multiple="true" cancelText="Cancel" okText="ok" formControlName="documents">
+                            <ng-container *ngFor="let service of allServices; let index = index;">
+
+                                <ion-select-option [value]="service">
+                                    {{service}}</ion-select-option>
+                            </ng-container>
+
+                            <!-- <ion-select-option value="PanCard">PAN Card</ion-select-option>
+                                              <ion-select-option value="votercard">Voter ID Card</ion-select-option> -->
+
+                        </ion-select>
+
+                    </ion-item>
+
+
+                    <ng-container *ngIf="allDocuments?.length > 1; else modeThanOne">
+                        <ion-item *ngFor="let document of allDocuments let index = index;">
+                            {{index+1}}. {{document}}
+                        </ion-item>
+                    </ng-container>
+                    
+                    <ng-template #modeThanOne>
+                           <ion-item>
+                              Please Select Required Documents.
+                           </ion-item>
+                    </ng-template>
+
+
+                <ion-item *ngIf="showField === false">
+                    <ion-label (click)="fieldOperation('show', null)">Add new Document</ion-label>
+
+                </ion-item>
+
+                <!-- showField === true -->
+                <ion-item *ngIf="showField">
+
+                    <ion-input #inputRef="" placeholder="enter service name"></ion-input>
+                    <ion-button color="primary" (click)="fieldOperation('add',inputRef.value)">Add</ion-button>
+                </ion-item>
+
+
+                <ion-item>
+                    <ion-label position="fixed">Charges</ion-label>
+                    <ion-input type="number" placeholder="Total Charges" formControlName="charges"></ion-input>
+                </ion-item>
+            </ion-list>
+
+            <ion-row>
+                <ion-button type="submit" [disabled]="!addForm.valid" class="save-btn">
+                    {{operationType || titlecase}} Service
+                    <ion-icon slot="end" name="save"></ion-icon>
+                </ion-button>
+            </ion-row>
+        </ion-card>
+    </form>
+
+    <form [formGroup]="addForm" (ngSubmit)="editService(addForm.value, addForm)" *ngIf="operationType === 'edit'">
+        <ion-card>
+
+
+            <ion-list>
+                <ion-item>
+                    <ion-label position="fixed">Name</ion-label>
+                    <ion-input [disabled]="type === 'edit'" type="text" placeholder="Enter Service name" formControlName="name"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label position="fixed">Description</ion-label>
+                    <ion-textarea placeholder="Enter more information here..." formControlName="description"></ion-textarea>
+                </ion-item>
+                <ion-list-header>
+                    <ion-label>
+                        Documents Required
+                    </ion-label>
+                </ion-list-header>
+
+
+                <ion-item>
                    
-               </ion-item>
+                    <ion-label>Select Documents</ion-label>
 
-               <!-- showField === true -->
-               <ion-item *ngIf="showField">
-               
-                <ion-input #inputRef placeholder="enter service name"></ion-input>
+                    <ion-select (ionChange)="getDocuments()" multiple="true"  formControlName="documents" cancelText="Cancel" okText="ok" >
+                        <ng-container *ngFor="let service of allServices; let index = index;">
+
+                            <ion-select-option [value]="service">
+                                {{service}}</ion-select-option>
+                        </ng-container>
+
+                    
+
+                    </ion-select>
+
+                </ion-item>
+
+
+                <ng-container *ngIf="allDocuments?.length > 1; else modeThanOne">
+                    <ion-item *ngFor="let document of allDocuments; let index = index;">
+                        {{index+1}}. {{document}}
+                    </ion-item>
+                </ng-container>
+                
+                <ng-template #modeThanOne>
+                       <ion-item>
+                          Please Select Required Documents.
+                       </ion-item>
+                </ng-template>
+
+
+            <ion-item *ngIf="showField === false">
+                <ion-label (click)="fieldOperation('show', null)">Add new Document</ion-label>
+
+            </ion-item>
+
+            <!-- showField === true -->
+            <ion-item *ngIf="showField">
+
+                <ion-input #inputRef="" placeholder="enter service name"></ion-input>
                 <ion-button color="primary" (click)="fieldOperation('add',inputRef.value)">Add</ion-button>
-              </ion-item>
-               
-            
+            </ion-item>
+
+
             <ion-item>
-              <ion-label position="fixed">Charges</ion-label>
-              <ion-input
-                type="number"
-                placeholder="Total Charges"
-                formControlName="charges"
-              ></ion-input>
+                <ion-label position="fixed">Charges</ion-label>
+                <ion-input type="number" placeholder="Total Charges" formControlName="charges"></ion-input>
             </ion-item>
         </ion-list>
 
         <ion-row>
-          <ion-button type="submit" [disabled]="!addForm.valid"  class="save-btn">
-              Save
-            <ion-icon slot="end" name="save"></ion-icon>
-          </ion-button>
+            <ion-button type="submit" [disabled]="!addForm.valid" class="save-btn">
+                {{operationType || titlecase}} Service
+                <ion-icon slot="end" name="save"></ion-icon>
+            </ion-button>
         </ion-row>
-      </ion-card>
-    </form>
-  </ng-container>
-</ion-content>
+    </ion-card>
+</form>
+</ng-container></ion-content>
