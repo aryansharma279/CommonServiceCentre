@@ -1,5 +1,5 @@
 {
-	"appId": "io.ionic.starter",
+	"appId": "com.csc.app",
 	"appName": "CommonServiceCentre",
 	"webDir": "www",
 	"bundledWebRuntime": false

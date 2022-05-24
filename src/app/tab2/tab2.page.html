@@ -1,17 +1,31 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 2
+      Bookings
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <ion-list>
+    <ion-item *ngFor="let booking of bookings; let index = index;">
+         <ion-label>
+               <h3>Service: {{booking.name}}</h3>
+               <h6>Charges: {{booking.charges}}</h6>
+               <p>{{booking.fullname}}</p>
+         </ion-label>
+         <ion-select
+         (ionChange)="statusChanged($event,booking, index)"
+         [(ngModel)]="booking.status"
+          placeholder="Status"
+      
+       >
+         <div *ngFor="let status of statusList">
+           <ion-select-option value="{{status}}">{{status}}</ion-select-option>
+         </div>
+       </ion-select>
+    </ion-item>
+ </ion-list>
+  <!-- <app-explore-container name="Tab 2 page"></app-explore-container> -->
 </ion-content>
