@@ -50,6 +50,11 @@ export class DataService {
             }/services/${
                 payload.name
             }/description`] = payload.description;
+            updates[`${
+                this.dbPath
+            }/services/${
+                payload.name
+            }/time`] = payload.time;
         updates[`${
                 this.dbPath
             }/services/${

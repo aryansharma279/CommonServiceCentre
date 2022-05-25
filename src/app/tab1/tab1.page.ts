@@ -48,6 +48,17 @@ export class Tab1Page {
       },
     );
   }
+  viewService(service) {
+    console.log("Service Selected",service);
+    this.modalService.presentModal(
+      AddServicePage,
+      {
+        type: 'view',
+        service: service,
+        
+      },
+    );
+  }
   deleteService(name) {
     this.dataService.deleteService(name).then((response) => {
       console.log('Service removed')

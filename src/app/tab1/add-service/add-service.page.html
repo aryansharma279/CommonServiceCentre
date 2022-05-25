@@ -22,6 +22,10 @@
                         <ion-label position="fixed">Description</ion-label>
                         <ion-textarea placeholder="Enter more information here..." formControlName="description"></ion-textarea>
                     </ion-item>
+                    <ion-item>
+                        <ion-label position="fixed">Process Time</ion-label>
+                        <ion-input type="number" placeholder="Enter Time Required..." formControlName="time"></ion-input>
+                    </ion-item>
                     <ion-list-header>
                         <ion-label>
                             Documents Required
@@ -102,6 +106,10 @@
                     <ion-label position="fixed">Description</ion-label>
                     <ion-textarea placeholder="Enter more information here..." formControlName="description"></ion-textarea>
                 </ion-item>
+                <ion-item>
+                    <ion-label position="fixed">Process Time</ion-label>
+                    <ion-input type="number" placeholder="Enter Time Required..." formControlName="time"></ion-input>
+                </ion-item>
                 <ion-list-header>
                     <ion-label>
                         Documents Required
@@ -166,5 +174,72 @@
             </ion-button>
         </ion-row>
     </ion-card>
+</form>
+<form [formGroup]="addForm"  *ngIf="operationType === 'view'">
+    <ion-card>
+
+
+        <ion-list>
+            <ion-item>
+                <ion-label position="fixed">Name</ion-label>
+                <ion-input [disabled]="type === 'view'" type="text"  formControlName="name">{{service.name}}</ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="fixed">Description</ion-label>
+                <ion-textarea [disabled]="type === 'view'" formControlName="description">{{service.description}}</ion-textarea>
+            </ion-item>
+            <ion-item>
+                <ion-label position="fixed">Process Time : </ion-label>
+                <ion-input [disabled]="type === 'view'" type="number" formControlName="time">{{service.time}}</ion-input>
+            </ion-item>
+            <ion-list-header>
+                <ion-label>
+                    Documents Required
+                </ion-label>
+            </ion-list-header>
+
+
+            <!-- <ion-item>
+               
+               
+
+                <ion-select (ionChange)="getDocuments()" multiple="true"  formControlName="documents" cancelText="Cancel" okText="ok" >
+                    <ng-container *ngFor="let service of allServices; let index = index;">
+
+                        <ion-select-option [value]="service">
+                            {{service}}</ion-select-option>
+                    </ng-container>
+
+                
+
+                </ion-select>
+
+            </ion-item> -->
+
+
+            <ng-container>
+               
+                <ion-item *ngFor="let document of service.documents; let index = index;">
+                    {{index+1}}. {{document}}
+                </ion-item>
+            </ng-container>
+            
+           
+
+
+       
+
+        <!-- showField === true -->
+    
+
+
+        <ion-item>
+            <ion-label position="fixed">Charges</ion-label>
+            <ion-input [disabled]="type === 'view'" type="number" formControlName="charges">{{service.charges}}</ion-input>
+        </ion-item>
+    </ion-list>
+
+    
+</ion-card>
 </form>
 </ng-container></ion-content>

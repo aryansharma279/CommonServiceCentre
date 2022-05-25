@@ -9,12 +9,20 @@
 <ion-content [fullscreen]="true">
 
   <ion-list>
-    <ion-item *ngFor="let booking of bookings; let index = index;">
-         <ion-label>
-               <h3>Service: {{booking.name}}</h3>
-               <h6>Charges: {{booking.charges}}</h6>
+   <ion-card>
+    <ion-row *ngFor="let booking of bookings; let index = index;">
+        
+          <ion-row>
+            <ion-col size="9">
+            <h3>Service: {{booking.name}}</h3>
+          </ion-col>
+          <ion-col size="3">
+            <h6>Charges: {{booking.charges}}</h6>
+          </ion-col>
+          </ion-row>     
+              
                <p>{{booking.fullname}}</p>
-         </ion-label>
+      <ion-row size="12">
          <ion-select
          (ionChange)="statusChanged($event,booking, index)"
          [(ngModel)]="booking.status"
@@ -25,7 +33,10 @@
            <ion-select-option value="{{status}}">{{status}}</ion-select-option>
          </div>
        </ion-select>
-    </ion-item>
+      </ion-row>
+    </ion-row>
+  </ion-card>
  </ion-list>
+
   <!-- <app-explore-container name="Tab 2 page"></app-explore-container> -->
 </ion-content>

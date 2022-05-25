@@ -61,6 +61,7 @@ export class AddServicePage implements OnInit {
     this.addForm = this.fb.group({
       name: [null, Validators.required],
       description: [null, Validators.required],
+      time: [null, Validators.required],
       documents: [null, Validators.required],
       charges: [null, Number],
     });
@@ -72,6 +73,7 @@ export class AddServicePage implements OnInit {
     this.addForm = this.fb.group({
       name: [this.service.name],
       description: [this.service.description, Validators.required],
+      time: [this.service.time, Validators.required],
       documents: [this.service.documents, Validators.required],
       charges: [this.service.charges,Number],
     });
@@ -105,6 +107,7 @@ saveService() {
       name: [null, Validators.required],
       // phoneNo: [null],
       description: [null, Validators.required],
+      time: [null, Validators.required],
       documents: [null, Validators.required],
       charges: [null, Validators.required],
 
@@ -128,6 +131,7 @@ saveService() {
  const payload = {
    name: formValues.name,
    description: formValues.description,
+   time: formValues.time,
    documents: formValues.documents,
    charges: formValues.charges,
    
