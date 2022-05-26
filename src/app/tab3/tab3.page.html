@@ -1,17 +1,58 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 3
+     CSC- ADMIN APP
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" color="light">
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <div class="main-header"></div>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+        <ion-label>
+          <ion-note color="light" class="ion-margin-start">
+            WELCOME 
+          </ion-note>
+          <p>
+            <ion-chip color="light">
+              <ion-label class="ion-text-wrap" >
+              ADMIN
+              </ion-label>
+              
+            </ion-chip>
+          </p>
+        </ion-label>
+      </ion-col>
+    
+    </ion-row>
+
+   
+
+ 
+
+    <ion-list>
+      <ion-list-header>
+        <ion-label>ADMIN DETAILS</ion-label>
+      </ion-list-header>
+      <ion-item lines="none" >
+        <ion-icon slot="start" name="cash" color="primary"></ion-icon>
+        <ion-label size="large" class="ion-text-wrap">
+          <b>Unique ID: 1823629817321709</b>
+          
+          <h5>
+            Password: **********
+          </h5>
+        </ion-label>
+        <!-- <ion-text slot="end" [color]="item?.amount > 0 ? 'success' : 'danger'">Charges ₹{{item.charges}}</ion-text> -->
+      </ion-item>
+    </ion-list>
+  </ion-grid>
+  <div>
+    <img src="../../assets/csc.jpg" />
+  </div>
+ 
 </ion-content>

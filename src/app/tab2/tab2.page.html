@@ -8,7 +8,36 @@
 
 <ion-content [fullscreen]="true">
 
-  <ion-list>
+
+  <ion-item lines="none"  *ngFor="let booking of bookings; let index = index;">
+    <ion-icon slot="start" name="cash" color="primary"></ion-icon>
+    <ion-label size="large" class="ion-text-wrap">
+      <b>Service: {{booking.name}}</b><br>
+      <b>User Name: {{booking.fullname}}</b>
+      <h5>Age: {{booking.age}}</h5>
+         
+      <h5>
+        Charges: {{booking.charges}}
+      </h5>
+    </ion-label>
+  <ion-item>
+      <ion-select
+      (ionChange)="statusChanged($event,booking, index)"
+      [(ngModel)]="booking.status"
+       placeholder="Status"
+   
+       slot="end" [color]="booking?.status == completed ? 'success' : 'danger'" >
+      <div *ngFor="let status of statusList">
+        <ion-select-option value="{{status}}">{{status}}</ion-select-option>
+      </div>
+    </ion-select>
+  </ion-item>
+ 
+    <!-- <ion-text slot="end" [color]="item?.amount > 0 ? 'success' : 'danger'">Charges ₹{{booking.charges}}</ion-text> -->
+  </ion-item>
+
+  
+  <!-- <ion-list>
    <ion-card>
     <ion-row *ngFor="let booking of bookings; let index = index;">
         
@@ -36,7 +65,51 @@
       </ion-row>
     </ion-row>
   </ion-card>
- </ion-list>
+ </ion-list> -->
+
 
   <!-- <app-explore-container name="Tab 2 page"></app-explore-container> -->
 </ion-content>
+<!-- <div>
+  <img [src]="restaurant?.cover" />
+</div> -->
+
+<!-- <ion-item lines="none" *ngFor="let booking of bookings; let index = index;">
+  <ion-label class="ion-text-wrap">
+    <ion-text>
+      <strong>Service: {{booking.name}}</strong>
+    </ion-text>
+    <p>
+      <ion-text color="medium">
+        User Name : {{booking.fullname}}
+      </ion-text>
+    </p>
+    <ion-row class="ion-text-center">
+     
+      <ion-col size="10" class="rating1">
+        <ion-select
+        (ionChange)="statusChanged($event,booking, index)"
+        [(ngModel)]="booking.status"
+         placeholder="Status"
+     
+      >
+        <div *ngFor="let status of statusList">
+          <ion-select-option value="{{status}}">{{status}}</ion-select-option>
+        </div>
+      </ion-select>
+      </ion-col>
+      <ion-col size="4">
+        <ion-text>Charges: ₹{{booking.charges}}</ion-text>
+      </ion-col>
+    </ion-row> -->
+    <!-- <p *ngIf="restaurant?.distance">
+      <ion-text color="primary" class="distance">
+        {{restaurant?.distance}} kms away
+      </ion-text>
+    </p> -->
+    
+     
+<!--     
+  </ion-label>
+ 
+</ion-item> -->
