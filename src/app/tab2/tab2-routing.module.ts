@@ -6,6 +6,10 @@ const routes: Routes = [
   {
     path: '',
     component: Tab2Page,
+  },
+  {
+    path: 'viewbooking',
+    loadChildren: () => import('./viewbooking/viewbooking.module').then( m => m.ViewbookingPageModule)
   }
 ];
 

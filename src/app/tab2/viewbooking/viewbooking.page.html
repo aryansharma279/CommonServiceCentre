@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button (click)="back()" defaultHref="tabs/services"></ion-back-button>
+  </ion-buttons>
+    <ion-title>viewbooking</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label position="fixed">Full Name :</ion-label>
+    <ion-label>{{booking.fullname}}</ion-label>
+</ion-item>
+<ion-item>
+  <ion-label position="fixed">Service Booked :</ion-label>
+  <ion-label>{{booking.name}}</ion-label>
+</ion-item>
+<ion-item>
+  <ion-label position="fixed">Age :</ion-label>
+  <ion-label>{{booking.age}}</ion-label>
+</ion-item>
+<ion-item>
+  <ion-label position="fixed">Address :</ion-label>
+  <ion-label>{{booking.address}}</ion-label>
+</ion-item>
+<ion-item>
+  <ion-label position="fixed">E-mail :</ion-label>
+  <ion-label>{{booking.email}}</ion-label>
+</ion-item>
+<ion-item>
+  <ion-label position="fixed">Charges :</ion-label>
+  <ion-label>{{booking.charges}} Rs</ion-label>
+</ion-item>
+<ion-item>
+  <ion-label>Status :</ion-label>
+  <ion-label>{{booking.status}}</ion-label>
+</ion-item>
+</ion-content>

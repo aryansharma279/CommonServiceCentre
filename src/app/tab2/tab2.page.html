@@ -9,7 +9,7 @@
 <ion-content [fullscreen]="true">
 
 
-  <ion-item lines="none"  *ngFor="let booking of bookings; let index = index;">
+  <ion-item lines="none"  *ngFor="let booking of bookings; let index = index;" >
     <ion-icon slot="start" name="cash" color="primary"></ion-icon>
     <ion-label size="large" class="ion-text-wrap">
       <b>Service: {{booking.name}}</b><br>
@@ -21,6 +21,7 @@
       </h5>
     </ion-label>
   <ion-item>
+    <ion-button (click)="viewBooking(booking)">View</ion-button>
       <ion-select
       (ionChange)="statusChanged($event,booking, index)"
       [(ngModel)]="booking.status"

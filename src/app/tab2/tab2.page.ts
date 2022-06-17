@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
 import {DataService} from '../services/data.service';
+import { ModalService } from '../modal/modal.service';
+import { ViewbookingPage } from './viewbooking/viewbooking.page';
 
 @Component({selector: 'app-tab2', templateUrl: 'tab2.page.html', styleUrls: ['tab2.page.scss']})
 export class Tab2Page {
@@ -9,7 +11,9 @@ export class Tab2Page {
     bookings : any;
     userBookings : any;
 
-    constructor(private dataService : DataService) {}
+    constructor(private dataService : DataService,
+        private modalService: ModalService
+        ) {}
 
     ngOnInit(): void {
         this.getBookings();
@@ -17,7 +21,16 @@ export class Tab2Page {
 
     }
 
-
+    viewBooking(booking) {
+        console.log(" Btn Click working");
+        this.modalService.presentModal(
+          ViewbookingPage,
+          {
+            type: '',
+            booking: booking,
+          },
+        );
+      }
     getBookings() {
 
         this.dataService.getAdminBookings().on('value', (snapshot) => {
